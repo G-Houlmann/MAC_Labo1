@@ -68,32 +68,32 @@ As expected, it takes more space after than before. This is quite logical since 
 
 
 ``` Java
-// Field type for the summary
-FieldType summaryFieldType = new FieldType();
-summaryFieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
-summaryFieldType.setTokenized(true);
-summaryFieldType.setStored(true);
-summaryFieldType.setStoreTermVectors(true);
-summaryFieldType.setStoreTermVectorPositions(true);
-summaryFieldType.setStoreTermVectorOffsets(true);
-summaryFieldType.freeze();
+    // Field type for the summary
+    FieldType summaryFieldType = new FieldType();
+    summaryFieldType.setIndexOptions(IndexOptions.DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
+    summaryFieldType.setTokenized(true);
+    summaryFieldType.setStored(true);
+    summaryFieldType.setStoreTermVectors(true);
+    summaryFieldType.setStoreTermVectorPositions(true);
+    summaryFieldType.setStoreTermVectorOffsets(true);
+    summaryFieldType.freeze();
 
-// Add id
-doc.add(new LongPoint(ID_FIELD, id));
-doc.add(new StoredField(ID_FIELD, id));
+    // Add id
+    doc.add(new LongPoint(ID_FIELD, id));
+    doc.add(new StoredField(ID_FIELD, id));
 
-// Add all authors if not null
-if (authors != null && !authors.isEmpty()) {
-    Arrays.stream(authors.split(AUTHOR_SEP)).forEach(author ->
-            doc.add(new StringField(AUTHORS_FIELD, author, Field.Store.YES)
-        );
-}
+    // Add all authors if not null
+    if (authors != null && !authors.isEmpty()) {
+        Arrays.stream(authors.split(AUTHOR_SEP)).forEach(author ->
+                doc.add(new StringField(AUTHORS_FIELD, author, Field.Store.YES)
+            );
+    }
 
-// Add title
-if (title != null && !title.isEmpty()) doc.add(new TextField(TITLE_FIELD, title, Field.Store.YES));
+    // Add title
+    if (title != null && !title.isEmpty()) doc.add(new TextField(TITLE_FIELD, title, Field.Store.YES));
 
-// Add summary
-if (summary != null && !summary.isEmpty()) doc.add(new Field(SUMMARY_FIELD, summary, summaryFieldType));
+    // Add summary
+    if (summary != null && !summary.isEmpty()) doc.add(new Field(SUMMARY_FIELD, summary, summaryFieldType));
 ```
 
 ## 3.2 Using different Analyzers
@@ -182,24 +182,24 @@ When using the standard analyzer, we obtained these results:
 Code used to obtain these results:
 ``` Java
 public void printTopRankingTerms(String field, int numTerms) {
-		// This methods print the top ranking term for a field.
-		// See "Reading Index".
-		
-		try {
-			//Obtain the terms statistics
-			HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
-			TermStats[] statsTable = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, cmp);
-			
-			//print
-			System.out.println("Top ranking terms for field ["  + field +"] are: ");
-			for (TermStats stats : statsTable){
-				System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurrences");
-			}
+    // This methods print the top ranking term for a field.
+    // See "Reading Index".
+    
+    try {
+        //Obtain the terms statistics
+        HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
+        TermStats[] statsTable = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, cmp);
+        
+        //print
+        System.out.println("Top ranking terms for field ["  + field +"] are: ");
+        for (TermStats stats : statsTable){
+            System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurrences");
+        }
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 ```
 
 ## 3.4 Searching
@@ -208,31 +208,31 @@ public void printTopRankingTerms(String field, int numTerms) {
 
 ``` Java
 public void query(String q) {
-		// See "Searching" section
-		try {
-			System.out.println("Searching for [" + q +"]");
+    // See "Searching" section
+    try {
+        System.out.println("Searching for [" + q +"]");
 
-			//Parse the query
-			QueryParser parser = new QueryParser("summary", analyzer);
-			Query query = parser.parse(q);
+        //Parse the query
+        QueryParser parser = new QueryParser("summary", analyzer);
+        Query query = parser.parse(q);
 
-			//obtain the hits
-			ScoreDoc[] hits = indexSearcher.search(query, indexReader.maxDoc()).scoreDocs;
-			int nbHits = hits.length;
+        //obtain the hits
+        ScoreDoc[] hits = indexSearcher.search(query, indexReader.maxDoc()).scoreDocs;
+        int nbHits = hits.length;
 
-			//print
-			System.out.println(nbHits + " results");
-			System.out.println("Top 10 results: ");
-			for(int i = 0; i < 10; ++i){
-				Document doc = indexSearcher.doc(hits[i].doc);
-				System.out.println(doc.get("id") + ": " + doc.get("title") + " (" +
-						hits[i].score + ")");
-			}
+        //print
+        System.out.println(nbHits + " results");
+        System.out.println("Top 10 results: ");
+        for(int i = 0; i < 10; ++i){
+            Document doc = indexSearcher.doc(hits[i].doc);
+            System.out.println(doc.get("id") + ": " + doc.get("title") + " (" +
+                    hits[i].score + ")");
+        }
 
-		} catch (ParseException | IOException e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (ParseException | IOException e) {
+        e.printStackTrace();
+    }
+}
 ```
 
 > 1. Searching for publications containing the term “Information Retrieval”.
