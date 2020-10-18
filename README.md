@@ -199,16 +199,16 @@ Top 10 results:
 
 | id | title | score |
 | :-: | :- | :-: |
-| 891 | Everyman's Information Retrieval System | 5.791674 |
-|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |5.791674|
-|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |5.791674|
-|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |4.4516068|
-|1935 | Randomized Binary Search Technique |4.4516068|
-|2307 | Dynamic Document Processing |4.4516068|
-|2451 | Design of Tree Structures for Efficient Querying |4.4516068|
-|2516 | Hierarchical Storage in Information Retrieval |4.4516068|
-|2519 | On the Problem of Communicating Complex Information |4.4516068|
-|2795 | Sentence Paraphrasing from a Conceptual Base |4.4516068|  
+| 1935 | Randomized Binary Search Technique | 1.529259 | 
+| 891 | Everyman's Information Retrieval System | 1.4450139 | 
+| 1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval | 1.4450139 | 
+| 1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter | 1.2743825 | 
+| 2519 | On the Problem of Communicating Complex Information | 1.1527222 | 
+| 2516 | Hierarchical Storage in Information Retrieval | 0.9871324 | 
+| 2307 | Dynamic Document Processing | 0.92724943 | 
+| 2795 | Sentence Paraphrasing from a Conceptual Base | 0.9011245 | 
+| 2990 | Effective Information Retrieval Using Term Accuracy | 0.87709016 | 
+| 2451 | Design of Tree Structures for Efficient Querying | 0.81509775 |   
 
 
 > 2. Searching for publications containing both “Information” and “Retrieval”.
@@ -220,16 +220,16 @@ Top 10 results:
 
 | id | title | score |
 | :-: | :- | :-: |
-|3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval |6.749342|
-|1032 | Theoretical Considerations in Information Retrieval Systems |6.5755634|
-|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |6.5755634|
-|891 | Everyman's Information Retrieval System |6.2221165|
-|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |6.2221165|
-|2307 | Dynamic Document Processing |6.1451206|
-|1527 | A Grammar Base Question Answering Procedure |5.7916746|
-|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |5.6600485|
-|1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console |5.6178956|
-|2990 | Effective Information Retrieval Using Term Accuracy |5.6178956|
+| 1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval | 1.7697731 | 
+| 891 | Everyman's Information Retrieval System | 1.6287744 | 
+| 3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval | 1.5548403 | 
+| 1935 | Randomized Binary Search Technique | 1.5292588 | 
+| 2307 | Dynamic Document Processing | 1.4392829 | 
+| 1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter | 1.436444 | 
+| 1032 | Theoretical Considerations in Information Retrieval Systems | 1.4117906 | 
+| 2519 | On the Problem of Communicating Complex Information | 1.3600239 | 
+| 1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console | 1.3113353 | 
+| 2990 | Effective Information Retrieval Using Term Accuracy | 1.2403991 |  
 
 > 3. Searching for publications containing at least the term “Retrieval” and, possibly “Information” but not “Database”.
 
@@ -240,16 +240,16 @@ Top 10 results:
 
 | id | title | score |
 | :-: | :- | :-: |
-|3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval |6.749342|
-|1032 | Theoretical Considerations in Information Retrieval Systems |6.5755634|
-|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |6.5755634|
-|891 | Everyman's Information Retrieval System |6.2221165|
-|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |6.2221165|
-|2307 | Dynamic Document Processing |6.1451206|
-|1527 | A Grammar Base Question Answering Procedure |5.7916746|
-|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |5.6600485|
-|1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console |5.6178956|
-|2990 | Effective Information Retrieval Using Term Accuracy |5.6178956|
+| 1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval | 1.7697731 | 
+| 891 | Everyman's Information Retrieval System | 1.6287744 | 
+| 3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval | 1.5548403 | 
+| 1935 | Randomized Binary Search Technique | 1.5292588 | 
+| 2307 | Dynamic Document Processing | 1.4392829 | 
+| 1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter | 1.436444 | 
+| 1032 | Theoretical Considerations in Information Retrieval Systems | 1.4117906 | 
+| 2519 | On the Problem of Communicating Complex Information | 1.3600239 | 
+| 1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console | 1.3113353 | 
+| 2990 | Effective Information Retrieval Using Term Accuracy | 1.2403991 |  
 
 > 4. Searching for publications containing a term starting with “Info”.
 
@@ -260,16 +260,16 @@ Top 10 results:
 
 | id | title | score |
 | :-: | :- | :-: |
-|222 | Coding Isomorphisms |1.0|
-|272 | A Storage Allocation Scheme for ALGOL 60 |1.0|
-|396 | Automation of Program  Debugging |1.0|
-|397 | A Card Format for Reference Files in Information Processing |1.0|
-|409 | CL-1, An Environment for a Compiler |1.0|
-|440 | Record Linkage |1.0|
-|483 | On the Nonexistence of a Phrase Structure Grammar for ALGOL 60 |1.0|
-|616 | An Information Algebra - Phase I Report-LanguageStructure Group of the CODASYL Development Committee |1.0|
-|644 | A String Language for Symbol Manipulation Based on ALGOL 60 |1.0|
-|655 | COMIT as an IR Language |1.0|
+| 222 | Coding Isomorphisms | 1.0 | 
+| 272 | A Storage Allocation Scheme for ALGOL 60 | 1.0 | 
+| 396 | Automation of Program  Debugging | 1.0 | 
+| 397 | A Card Format for Reference Files in Information Processing | 1.0 | 
+| 409 | CL-1, An Environment for a Compiler | 1.0 | 
+| 440 | Record Linkage | 1.0 | 
+| 483 | On the Nonexistence of a Phrase Structure Grammar for ALGOL 60 | 1.0 | 
+| 616 | An Information Algebra - Phase I Report-LanguageStructure Group of the CODASYL Development Committee | 1.0 | 
+| 644 | A String Language for Symbol Manipulation Based on ALGOL 60 | 1.0 | 
+| 655 | COMIT as an IR Language | 1.0 | 
 
 > 5. Searching for publications containing the term “Information” close to “Retrieval” (max distance 5).
 
@@ -280,14 +280,54 @@ Top 10 results:
 
 | id | title | score |
 | :-: | :- | :-: |
-|891 | Everyman's Information Retrieval System |5.791674|
-|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |5.791674|
-|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |5.791674|
-|2307 | Dynamic Document Processing |5.235496|
-|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |4.4516068|
-|1935 | Randomized Binary Search Technique |4.4516068|
-|2451 | Design of Tree Structures for Efficient Querying |4.4516068|
-|2516 | Hierarchical Storage in Information Retrieval |4.4516068|
-|2519 | On the Problem of Communicating Complex Information |4.4516068|
-|2795 | Sentence Paraphrasing from a Conceptual Base |4.4516068|
+| 1935 | Randomized Binary Search Technique | 1.529259 | 
+| 891 | Everyman's Information Retrieval System | 1.4450139 | 
+| 1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval | 1.4450139 | 
+| 1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter | 1.2743825 | 
+| 2519 | On the Problem of Communicating Complex Information | 1.1527222 | 
+| 2307 | Dynamic Document Processing | 1.135644 | 
+| 2516 | Hierarchical Storage in Information Retrieval | 0.9871324 | 
+| 2795 | Sentence Paraphrasing from a Conceptual Base | 0.9011245 | 
+| 2990 | Effective Information Retrieval Using Term Accuracy | 0.87709016 | 
+| 2451 | Design of Tree Structures for Efficient Querying | 0.81509775 |  
+
+
+## 3.5
+ > 5. Compare the query "compiler program" with the `ClassicSimilarity` and `MySimilarity`
+
+ With the `ClassicSimilarity` :
+
+578 results
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+| 3189 | An Algebraic Compiler for the FORTRAN Assembly Program | 1.4853004 | 
+| 1215 | Some Techniques Used in the ALCOR ILLINOIS 7090 | 1.40438 | 
+| 1183 | A Note on the Use of a Digital Computerfor Doing Tedious Algebra and Programming | 1.3361712 | 
+| 1459 | Requirements for Real-Time Languages | 1.3162413 | 
+| 718 | An Experiment in Automatic Verification of Programs | 1.3136772 | 
+| 1122 | A Note on Some Compiling Algorithms | 1.3136772 | 
+| 1465 | Program Translation Viewed as a General Data Processing Problem | 1.2863079 | 
+| 2652 | Reduction of Compilation Costs Through Language Contraction | 1.2732332 | 
+| 1988 | A Formalism for Translator Interactions | 1.2580339 | 
+| 46 | Multiprogramming STRETCH: Feasibility Considerations | 1.2391106 | 
+
+With the `MySimilarity` :
+
+578 results
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+| 2923 | High-Level Data Flow Analysis | 5.7265415 | 
+| 2534 | Design and Implementation of a Diagnostic Compiler for PL/I | 5.622605 | 
+| 637 | A NELIAC-Generated 7090-1401 Compiler | 5.411427 | 
+| 1647 | WATFOR-The University of Waterloo FORTRAN IV Compiler | 5.399087 | 
+| 2652 | Reduction of Compilation Costs Through Language Contraction | 4.967098 | 
+| 3080 | Proving the Correctness of Heuristically Optimized Code | 4.803714 | 
+| 1135 | A General Business-Oriented Language Based on Decision Expressions* | 4.7554483 | 
+| 1237 | Conversion of Decision Tables To Computer Programs | 4.7554483 | 
+| 1459 | Requirements for Real-Time Languages | 4.7554483 | 
+| 2944 | Shifting Garbage Collection Overhead to Compile Time | 4.7554483 |
 

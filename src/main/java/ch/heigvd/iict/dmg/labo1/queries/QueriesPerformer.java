@@ -85,6 +85,8 @@ public class QueriesPerformer {
 						hits[i].score + ")");
 			}
 
+
+
 		} catch (ParseException | IOException e) {
 			e.printStackTrace();
 		}
