@@ -1,11 +1,17 @@
 package ch.heigvd.iict.dmg.labo1.queries;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.misc.HighFreqTerms;
 import org.apache.lucene.misc.TermStats;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.search.similarities.Similarity;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
@@ -45,7 +51,7 @@ public class QueriesPerformer {
 			TermStats[] statsTable = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, cmp);
 			System.out.println("Top ranking terms for field ["  + field +"] are: ");
 			for (TermStats stats : statsTable){
-				System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurences");
+				System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurrences");
 			}
 
 		} catch (Exception e) {
@@ -54,10 +60,28 @@ public class QueriesPerformer {
 	}
 	
 	public void query(String q) {
-		// TODO student
 		// See "Searching" section
 
-		System.out.println("Searching for [" + q +"]");
+		try {
+			System.out.println("Searching for [" + q +"]");
+			QueryParser parser = new QueryParser("summary", analyzer);
+			Query query = parser.parse(q);
+
+			ScoreDoc[] hits = indexSearcher.search(query, indexReader.maxDoc()).scoreDocs;
+
+			int nbHits = hits.length;
+
+			System.out.println(nbHits + " results");
+			System.out.println("Top 10 results: ");
+			for(int i = 0; i < 10; ++i){
+				Document doc = indexSearcher.doc(hits[i].doc);
+				System.out.println(doc.get("id") + ": " + doc.get("title") + " (" +
+						hits[i].score + ")");
+			}
+
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
 	}
 	 
 	public void close() {

@@ -5,6 +5,7 @@ import ch.heigvd.iict.dmg.labo1.parsers.CACMParser;
 import ch.heigvd.iict.dmg.labo1.queries.QueriesPerformer;
 import ch.heigvd.iict.dmg.labo1.similarities.MySimilarity;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
@@ -20,7 +21,7 @@ public class Main {
 	public static void main(String[] args) {
 
 		// 1.1. create an analyzer
-		Analyzer analyser = getAnalyzer();
+		Analyzer analyser = new EnglishAnalyzer();
 
 		// TODO student "Tuning the Lucene Score"
 //		Similarity similarity = null;//new MySimilarity();
@@ -50,16 +51,13 @@ public class Main {
 	}
 
 	private static void searching(QueriesPerformer queriesPerformer) {
-		// Example
-		queriesPerformer.query("compiler program");
 
-		// TODO student
-        // queriesPerformer.query(<containing the term Information Retrieval>);
-		// queriesPerformer.query(<containing both Information and Retrieval>);
-        // and so on for all the queries asked on the instructions...
-        //
-		// Reminder: it must print the total number of results and
-		// the top 10 results.
+		queriesPerformer.query("\"Information Retrieval\"");
+		queriesPerformer.query("Information AND Retrieval");
+		queriesPerformer.query("+Retrieval Information NOT Database");
+		queriesPerformer.query("Info*");
+		queriesPerformer.query(" \"Information Retrieval\"~5 ");
+
 	}
 
 	private static Analyzer getAnalyzer() {
