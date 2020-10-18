@@ -5,23 +5,23 @@ import ch.heigvd.iict.dmg.labo1.parsers.CACMParser;
 import ch.heigvd.iict.dmg.labo1.queries.QueriesPerformer;
 import ch.heigvd.iict.dmg.labo1.similarities.MySimilarity;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.core.StopAnalyzer;
 import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
 import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
 import org.apache.lucene.search.similarities.Similarity;
 
 import java.io.IOException;
-import java.nio.file.FileSystems;
+import java.nio.file.Paths;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// 1.1. create an analyzer
-		Analyzer analyser = new EnglishAnalyzer();
+		Analyzer analyser = getAnalyzer();
 
 		// TODO student "Tuning the Lucene Score"
 //		Similarity similarity = null;//new MySimilarity();
@@ -32,7 +32,7 @@ public class Main {
 		CACMParser parser = new CACMParser("documents/cacm.txt", indexer);
 		parser.startParsing();
 		indexer.finalizeIndex();
-		
+
 		QueriesPerformer queriesPerformer = new QueriesPerformer(analyser, similarity);
 
 		// Section "Reading Index"
@@ -42,7 +42,7 @@ public class Main {
 		searching(queriesPerformer);
 
 		queriesPerformer.close();
-		
+
 	}
 
 	private static void readingIndex(QueriesPerformer queriesPerformer) {
@@ -60,15 +60,15 @@ public class Main {
 
 	}
 
-	private static Analyzer getAnalyzer() {
-	    // TODO student... For the part "Indexing and Searching CACM collection
-		// - Indexing" use, as indicated in the instructions,
-		// the StandardAnalyzer class.
-		//
-		// For the next part "Using different Analyzers" modify this method
-		// and return the appropriate Analyzers asked.
+	private static Analyzer getAnalyzer() throws IOException {
+		// 3.2.1
+		// return new WhitespaceAnalyzer();
+		// return new EnglishAnalyzer();
+		// return new ShingleAnalyzerWrapper();
+		// return new ShingleAnalyzerWrapper(3, 3);
+		// return new StopAnalyzer(Paths.get("common_words.txt"));
 
-		return new ShingleAnalyzerWrapper(3,3);
+		return new EnglishAnalyzer();
 	}
 
 }

@@ -98,6 +98,8 @@ As expected, it takes more space after than before. This is quite logical since 
 
 ## 3.2 Using different Analyzers
 
+All the indexes have been computed using an instance from `ClassicSimilarity`.
+
 > 2. Explain the difference of these five analyzers. 
 
 `WhitespaceAnalyzer`
@@ -137,7 +139,7 @@ General data:
 
 Top 10 frequent terms for the summary field:
 
-|| `Whitespace` | `English` | `Shingle 1&2` | `Shingle 1&3` | `StopAnalyzer` |
+|Rank | `Whitespace` | `English` | `Shingle 1&2` | `Shingle 1&3` | `StopAnalyzer` |
 | :- |:- |:- |:- |:- |:- |
 | 1 |of | us| the | the | system|
 | 2 | the| which| of| of | computer|
