@@ -5,8 +5,15 @@ import ch.heigvd.iict.dmg.labo1.parsers.CACMParser;
 import ch.heigvd.iict.dmg.labo1.queries.QueriesPerformer;
 import ch.heigvd.iict.dmg.labo1.similarities.MySimilarity;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.core.StopAnalyzer;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
+import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.Similarity;
+
+import java.io.IOException;
+import java.nio.file.FileSystems;
 
 public class Main {
 
@@ -18,7 +25,7 @@ public class Main {
 		// TODO student "Tuning the Lucene Score"
 //		Similarity similarity = null;//new MySimilarity();
 		Similarity similarity = new MySimilarity();
-		
+
 		CACMIndexer indexer = new CACMIndexer(analyser, similarity);
 		indexer.openIndex();
 		CACMParser parser = new CACMParser("documents/cacm.txt", indexer);
@@ -63,7 +70,7 @@ public class Main {
 		// For the next part "Using different Analyzers" modify this method
 		// and return the appropriate Analyzers asked.
 
-		return new StandardAnalyzer(); // TODO student
+		return new ShingleAnalyzerWrapper(3,3);
 	}
 
 }
