@@ -155,3 +155,184 @@ Top 10 frequent terms for the summary field:
 1. The `EnglishAnalyzer` obviously uses stemming, the others probably don't (it's certain for the `StopAnalyzer` since *computer* isn't stemmed as *comput* but unclear for the others, although the previous description suggest they don't either).
 2. The best performances are achieved by the stopwords-based strategies (i.e. `EnglishAnalyzer` and `StopAnalyzer`), they also produce the most relevant tokens. A trivial analyzer like the `WhitespaceAnalyzer` is totally 
 3. Shingle-based strategies can *really* quickly become time and resources consuming with the growth of the shingle size, so we should carefully think if we need it or not.
+By default, use a `StandardAnalyzer` (lower case filter)
+
+## 3.3 Reading Index
+> 1. What is the author with the highest number of publications? How many publications does he/she have?
+
+The author with the highest number of publications is `Thacher Jr., H. C.` , with 38 publications
+
+> 2. List the top 10 terms in the title field with their frequency.
+
+When using the standard analyzer, we obtained these results: 
+
+| term | Frequency |
+| :- | :-: |
+|of | 1215 |
+|algorithm | 983 |
+|a | 963 |
+|for | 694 |
+|the | 675 |
+|and | 425 |
+|in | 387 |
+|on | 338 |
+|an | 278 |
+|computer | 262 |  
+
+Code used to obtain these results:
+``` Java
+public void printTopRankingTerms(String field, int numTerms) {
+		// This methods print the top ranking term for a field.
+		// See "Reading Index".
+		
+		try {
+			//Obtain the terms statistics
+			HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
+			TermStats[] statsTable = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, cmp);
+			
+			//print
+			System.out.println("Top ranking terms for field ["  + field +"] are: ");
+			for (TermStats stats : statsTable){
+				System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurrences");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+```
+
+## 3.4 Searching
+
+### Code written
+
+``` Java
+public void query(String q) {
+		// See "Searching" section
+		try {
+			System.out.println("Searching for [" + q +"]");
+
+			//Parse the query
+			QueryParser parser = new QueryParser("summary", analyzer);
+			Query query = parser.parse(q);
+
+			//obtain the hits
+			ScoreDoc[] hits = indexSearcher.search(query, indexReader.maxDoc()).scoreDocs;
+			int nbHits = hits.length;
+
+			//print
+			System.out.println(nbHits + " results");
+			System.out.println("Top 10 results: ");
+			for(int i = 0; i < 10; ++i){
+				Document doc = indexSearcher.doc(hits[i].doc);
+				System.out.println(doc.get("id") + ": " + doc.get("title") + " (" +
+						hits[i].score + ")");
+			}
+
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+```
+
+> 1. Searching for publications containing the term “Information Retrieval”.
+
+Parsed query : `summary:"inform retriev"`  
+11 results
+
+Top 10 results:
+
+| id | title | score |
+| :-: | :- | :-: |
+| 891 | Everyman's Information Retrieval System | 5.791674 |
+|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |5.791674|
+|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |5.791674|
+|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |4.4516068|
+|1935 | Randomized Binary Search Technique |4.4516068|
+|2307 | Dynamic Document Processing |4.4516068|
+|2451 | Design of Tree Structures for Efficient Querying |4.4516068|
+|2516 | Hierarchical Storage in Information Retrieval |4.4516068|
+|2519 | On the Problem of Communicating Complex Information |4.4516068|
+|2795 | Sentence Paraphrasing from a Conceptual Base |4.4516068|  
+
+
+> 2. Searching for publications containing both “Information” and “Retrieval”.
+> 
+Parsed query : `+summary:inform +summary:retriev`  
+23 results  
+
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+|3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval |6.749342|
+|1032 | Theoretical Considerations in Information Retrieval Systems |6.5755634|
+|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |6.5755634|
+|891 | Everyman's Information Retrieval System |6.2221165|
+|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |6.2221165|
+|2307 | Dynamic Document Processing |6.1451206|
+|1527 | A Grammar Base Question Answering Procedure |5.7916746|
+|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |5.6600485|
+|1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console |5.6178956|
+|2990 | Effective Information Retrieval Using Term Accuracy |5.6178956|
+
+> 3. Searching for publications containing at least the term “Retrieval” and, possibly “Information” but not “Database”.
+
+Parsed query : `+summary:retriev summary:inform -summary:databas`  
+54 results  
+
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+|3134 | The Use of Normal Multiplication Tablesfor Information Storage and Retrieval |6.749342|
+|1032 | Theoretical Considerations in Information Retrieval Systems |6.5755634|
+|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |6.5755634|
+|891 | Everyman's Information Retrieval System |6.2221165|
+|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |6.2221165|
+|2307 | Dynamic Document Processing |6.1451206|
+|1527 | A Grammar Base Question Answering Procedure |5.7916746|
+|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |5.6600485|
+|1681 | Easy English,a Language for InformationRetrieval Through a Remote Typewriter Console |5.6178956|
+|2990 | Effective Information Retrieval Using Term Accuracy |5.6178956|
+
+> 4. Searching for publications containing a term starting with “Info”.
+
+Parsed query : `summary:info*`  
+193 results
+
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+|222 | Coding Isomorphisms |1.0|
+|272 | A Storage Allocation Scheme for ALGOL 60 |1.0|
+|396 | Automation of Program  Debugging |1.0|
+|397 | A Card Format for Reference Files in Information Processing |1.0|
+|409 | CL-1, An Environment for a Compiler |1.0|
+|440 | Record Linkage |1.0|
+|483 | On the Nonexistence of a Phrase Structure Grammar for ALGOL 60 |1.0|
+|616 | An Information Algebra - Phase I Report-LanguageStructure Group of the CODASYL Development Committee |1.0|
+|644 | A String Language for Symbol Manipulation Based on ALGOL 60 |1.0|
+|655 | COMIT as an IR Language |1.0|
+
+> 5. Searching for publications containing the term “Information” close to “Retrieval” (max distance 5).
+
+Parsed query : `summary:"inform retriev"~5`  
+15 results
+
+Top 10 results: 
+
+| id | title | score |
+| :-: | :- | :-: |
+|891 | Everyman's Information Retrieval System |5.791674|
+|1457 | Data Manipulation and Programming Problemsin Automatic Information Retrieval |5.791674|
+|1699 | Experimental Evaluation of InformationRetrieval Through a Teletypewriter |5.791674|
+|2307 | Dynamic Document Processing |5.235496|
+|1652 | A Code for Non-numeric Information ProcessingApplications in Online Systems |4.4516068|
+|1935 | Randomized Binary Search Technique |4.4516068|
+|2451 | Design of Tree Structures for Efficient Querying |4.4516068|
+|2516 | Hierarchical Storage in Information Retrieval |4.4516068|
+|2519 | On the Problem of Communicating Complex Information |4.4516068|
+|2795 | Sentence Paraphrasing from a Conceptual Base |4.4516068|
+
