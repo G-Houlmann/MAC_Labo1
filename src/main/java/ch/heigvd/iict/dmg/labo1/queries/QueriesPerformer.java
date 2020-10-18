@@ -46,9 +46,13 @@ public class QueriesPerformer {
 	public void printTopRankingTerms(String field, int numTerms) {
 		// This methods print the top ranking term for a field.
 		// See "Reading Index".
-		HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
+
 		try {
+			//Obtain the terms statistics
+			HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
 			TermStats[] statsTable = HighFreqTerms.getHighFreqTerms(indexReader, numTerms, field, cmp);
+
+			//print
 			System.out.println("Top ranking terms for field ["  + field +"] are: ");
 			for (TermStats stats : statsTable){
 				System.out.println(new String(stats.termtext.bytes) + ", " + stats.totalTermFreq + " occurrences");
@@ -61,16 +65,18 @@ public class QueriesPerformer {
 	
 	public void query(String q) {
 		// See "Searching" section
-
 		try {
 			System.out.println("Searching for [" + q +"]");
+
+			//Parse the query
 			QueryParser parser = new QueryParser("summary", analyzer);
 			Query query = parser.parse(q);
 
+			//obtain the hits
 			ScoreDoc[] hits = indexSearcher.search(query, indexReader.maxDoc()).scoreDocs;
-
 			int nbHits = hits.length;
 
+			//print
 			System.out.println(nbHits + " results");
 			System.out.println("Top 10 results: ");
 			for(int i = 0; i < 10; ++i){
