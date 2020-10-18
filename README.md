@@ -98,7 +98,7 @@ As expected, it takes more space after than before. This is quite logical since 
 
 ## 3.2 Using different Analyzers
 
-All the indexes have been computed using an instance from `ClassicSimilarity`.
+All the indexes have been computed using an instance of `ClassicSimilarity`.
 
 > 2. Explain the difference of these five analyzers. 
 
@@ -237,6 +237,10 @@ public void query(String q) {
 }
 ```
 
+### Queries
+
+All queries have been computed using an instance of `ClassicSimilarity`.
+
 > 1. Searching for publications containing the term “Information Retrieval”.
 
 Parsed query : `summary:"inform retriev"`  
@@ -340,6 +344,7 @@ Top 10 results:
 
 
 ## 3.5
+
  > 5. Compare the query "compiler program" with the `ClassicSimilarity` and `MySimilarity`
 
  With the `ClassicSimilarity` :
@@ -378,3 +383,22 @@ Top 10 results:
 | 1459 | Requirements for Real-Time Languages | 4.7554483 | 
 | 2944 | Shifting Garbage Collection Overhead to Compile Time | 4.7554483 |
 
+
+### Code written
+
+``` Java 
+    @Override
+    public float tf(float freq) {
+        return (float) (1 + Math.log10(freq));
+    }
+
+    @Override
+    public float idf(long docFreq, long docCount) {
+        return (float) (Math.log10(docCount / (docFreq + 1.0)) + 1);
+    }
+
+    @Override
+    public float lengthNorm(int numTerms) {
+        return 1;
+    }
+```
