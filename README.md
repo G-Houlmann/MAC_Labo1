@@ -383,6 +383,12 @@ Top 10 results:
 | 1459 | Requirements for Real-Time Languages | 4.7554483 | 
 | 2944 | Shifting Garbage Collection Overhead to Compile Time | 4.7554483 |
 
+We can see that the results are very different. However, the publications 2652 and 1459 are in the top 10 with both Similarities. That shows that even if the parameters are different, the same kind of publications are found.
+
+We can observe that on the top-rated publication with the `ClassicSimilarity` (3189), "program" is found 2 times and "compil" 4 times in the summary. For a total of 389 chars, this is a ratio of 6/389 = 0.0154.  
+On the other hand, on the top-rated publication with the `MySimilarity` (2923), "program" is found 5 times and "compil" 3 times in the summary. For a total of 940 chars, this is a ratio of 8/940 = 0.00851.
+The ratio is higher with `ClassicSimilarity`, but the total number of occurences of the searched terms is higher with `MySimilarity`.
+
 
 ### Code written
 
